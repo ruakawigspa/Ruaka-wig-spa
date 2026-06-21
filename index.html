@@ -45,6 +45,9 @@
   <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
+  <!-- TikTok embed -->
+  <script async src="https://www.tiktok.com/embed.js"></script>
+
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
@@ -91,7 +94,6 @@
   --rose-lt:     #E04599;
   --cream:       #F5EFE6;
   --cream-dk:    #EDE4D6;
-  --lilac:       #E8D5F0;
   --white:       #FFFFFF;
   --mid:         #6B5778;
   --muted:       #9B88A8;
@@ -99,732 +101,497 @@
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans:  'Jost', 'Helvetica Neue', sans-serif;
 
-  --ease: cubic-bezier(.4,0,.2,1);
+  --ease:     cubic-bezier(.4,0,.2,1);
   --ease-out: cubic-bezier(0,.55,.45,1);
 }
 
 /* ==========================================================
    RESET
 ========================================================== */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;font-size:16px;}
-body{
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
   font-family:var(--font-sans);
   background:var(--ink);
   color:var(--cream);
   line-height:1.7;
   overflow-x:hidden;
 }
-img{max-width:100%;width: 100px;display:block;object-fit:cover;}
-a{text-decoration:none;color:inherit;}
-ul{list-style:none;}
-button{cursor:pointer;border:none;background:none;font-family:inherit;}
+img { max-width:100%; display:block; object-fit:cover; }
+a   { text-decoration:none; color:inherit; }
+ul  { list-style:none; }
+button { cursor:pointer; border:none; background:none; font-family:inherit; }
 
 /* ==========================================================
    TYPOGRAPHY
 ========================================================== */
-h1,h2,h3,h4{font-family:var(--font-serif);line-height:1.15;letter-spacing:-.01em;}
-h1{font-size:clamp(2.8rem,7vw,5.5rem);font-weight:300;}
-h2{font-size:clamp(2rem,4.5vw,3.4rem);font-weight:300;}
-h3{font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:400;}
-h4{font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;font-family:var(--font-sans);}
-p{font-size:.975rem;font-weight:300;line-height:1.8;}
+h1,h2,h3,h4 { font-family:var(--font-serif); line-height:1.15; letter-spacing:-.01em; }
+h1 { font-size:clamp(2.8rem,7vw,5.5rem); font-weight:300; }
+h2 { font-size:clamp(2rem,4.5vw,3.4rem); font-weight:300; }
+h3 { font-size:clamp(1.25rem,2.5vw,1.75rem); font-weight:400; }
+h4 { font-size:.72rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; font-family:var(--font-sans); }
+p  { font-size:.975rem; font-weight:300; line-height:1.8; }
 
-.eyebrow{
+.eyebrow {
   font-family:var(--font-sans);
-  font-size:.68rem;
-  font-weight:600;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:var(--gold);
-  display:block;
-  margin-bottom:.6rem;
+  font-size:.68rem; font-weight:600; letter-spacing:.25em; text-transform:uppercase;
+  color:var(--gold); display:block; margin-bottom:.6rem;
 }
 
 /* ==========================================================
-   GOLD LINE — signature divider
+   GOLD LINE
 ========================================================== */
-.g-line{
-  display:block;
-  width:48px;height:1px;
+.g-line {
+  display:block; width:48px; height:1px;
   background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  margin:1.4rem 0;
-  position:relative;
-  overflow:hidden;
+  margin:1.4rem 0; position:relative; overflow:hidden;
 }
-.g-line::after{
-  content:'';
-  position:absolute;inset:0;
+.g-line::after {
+  content:''; position:absolute; inset:0;
   background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.9) 50%,transparent 100%);
   transform:translateX(-100%);
   animation:glide 3s ease-in-out infinite;
 }
-@keyframes glide{0%{transform:translateX(-100%)}60%{transform:translateX(200%)}100%{transform:translateX(200%)}}
-.g-line.center{margin:1.4rem auto;}
-.g-line.wide{width:80px;}
+@keyframes glide { 0%{transform:translateX(-100%)} 60%{transform:translateX(200%)} 100%{transform:translateX(200%)} }
+.g-line.center { margin:1.4rem auto; }
+.g-line.wide   { width:80px; }
 
 /* ==========================================================
    BUTTONS
 ========================================================== */
-.btn{
-  display:inline-flex;align-items:center;gap:.5rem;
-  padding:.8rem 2rem;
-  border-radius:0;
-  font-family:var(--font-sans);
-  font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-  cursor:pointer;border:none;
+.btn {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.8rem 2rem; border-radius:0;
+  font-family:var(--font-sans); font-size:.78rem; font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase;
+  cursor:pointer; border:none;
   transition:all .28s var(--ease);
 }
-.btn:hover{transform:translateY(-2px);}
-.btn:active{transform:translateY(0);}
-.btn ion-icon{font-size:1rem;}
+.btn:hover  { transform:translateY(-2px); }
+.btn:active { transform:translateY(0); }
+.btn ion-icon { font-size:1rem; }
 
-.btn-gold{
-  background:var(--gold);
-  color:var(--ink);
-  box-shadow:0 4px 24px rgba(201,168,76,.25);
-}
-.btn-gold:hover{background:var(--gold-lt);box-shadow:0 8px 32px rgba(201,168,76,.4);}
+.btn-gold  { background:var(--gold); color:var(--ink); box-shadow:0 4px 24px rgba(201,168,76,.25); }
+.btn-gold:hover { background:var(--gold-lt); box-shadow:0 8px 32px rgba(201,168,76,.4); }
 
-.btn-ghost{
-  background:transparent;
-  border:1px solid rgba(201,168,76,.45);
-  color:var(--gold);
-}
-.btn-ghost:hover{border-color:var(--gold);background:rgba(201,168,76,.07);}
+.btn-ghost { background:transparent; border:1px solid rgba(201,168,76,.45); color:var(--gold); }
+.btn-ghost:hover { border-color:var(--gold); background:rgba(201,168,76,.07); }
 
-.btn-dark{
-  background:var(--ink-soft);
-  border:1px solid rgba(255,255,255,.1);
-  color:var(--cream);
-}
-.btn-dark:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.05);}
-
-.btn-wa{
-  background:#25D366;
-  color:#fff;
-  box-shadow:0 4px 20px rgba(37,211,102,.3);
-}
-.btn-wa:hover{background:#1EBF5C;box-shadow:0 8px 28px rgba(37,211,102,.5);}
+.btn-wa  { background:#25D366; color:#fff; box-shadow:0 4px 20px rgba(37,211,102,.3); }
+.btn-wa:hover { background:#1EBF5C; box-shadow:0 8px 28px rgba(37,211,102,.5); }
 
 /* ==========================================================
    FAB
 ========================================================== */
-.fab-wa{
-  position:fixed;bottom:2rem;right:2rem;z-index:9999;
-  width:56px;height:56px;border-radius:50%;
+.fab-wa {
+  position:fixed; bottom:2rem; right:2rem; z-index:9999;
+  width:56px; height:56px; border-radius:50%;
   background:#25D366;
-  display:flex;align-items:center;justify-content:center;
+  display:flex; align-items:center; justify-content:center;
   box-shadow:0 6px 24px rgba(37,211,102,.4);
-  transition:transform .2s var(--ease),box-shadow .2s;
+  transition:transform .2s var(--ease), box-shadow .2s;
 }
-.fab-wa:hover{transform:scale(1.1);box-shadow:0 10px 30px rgba(37,211,102,.6);}
-.fab-wa ion-icon{font-size:1.6rem;color:#fff;}
+.fab-wa:hover { transform:scale(1.1); box-shadow:0 10px 30px rgba(37,211,102,.6); }
+.fab-wa ion-icon { font-size:1.6rem; color:#fff; }
 
 /* ==========================================================
    NAVBAR
 ========================================================== */
-#nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
+#nav {
+  position:fixed; top:0; left:0; right:0; z-index:1000;
   padding:1rem 4rem;
-  display:flex;align-items:center;justify-content:space-between;
+  display:flex; align-items:center; justify-content:space-between;
   transition:all .4s var(--ease);
 }
-#nav.scrolled{
+#nav.scrolled {
   background:rgba(13,10,14,.94);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
   padding:1rem 4rem;
   border-bottom:1px solid rgba(201,168,76,.12);
 }
-.nav-brand{display:flex;align-items:center;gap:1rem;}
-.nav-brand img{width:58px;height:58px;object-fit:contain;}
-.nav-brand-name{
-  font-family:var(--font-serif);
-  font-size:1.3rem;font-weight:400;
-  color:var(--cream);line-height:1.2;
+.nav-brand { display:flex; align-items:center; gap:1rem; }
+.nav-brand img { width:58px; height:58px; object-fit:contain; }
+.nav-brand-name {
+  font-family:var(--font-serif); font-size:1.3rem; font-weight:400;
+  color:var(--cream); line-height:1.2;
 }
-.nav-brand-name span{color:var(--gold);font-style:italic;font-size:1.1rem;}
+.nav-brand-name span { color:var(--gold); font-style:italic; font-size:1.1rem; }
 
-.nav-links{display:flex;align-items:center;gap:2.5rem;}
-.nav-links a{
-  font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(245,239,230,.65);
-  transition:color .2s;position:relative;
+.nav-links { display:flex; align-items:center; gap:2.5rem; }
+.nav-links a {
+  font-size:.7rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+  color:rgba(245,239,230,.65); transition:color .2s; position:relative;
 }
-.nav-links a::after{
-  content:'';position:absolute;bottom:-5px;left:0;width:0;height:1px;
-  background:var(--gold);transition:width .25s var(--ease);
+.nav-links a::after {
+  content:''; position:absolute; bottom:-5px; left:0; width:0; height:1px;
+  background:var(--gold); transition:width .25s var(--ease);
 }
-.nav-links a:hover{color:var(--cream);}
-.nav-links a.active{color:var(--gold);}
-.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-links a:hover  { color:var(--cream); }
+.nav-links a.active { color:var(--gold); }
+.nav-links a:hover::after, .nav-links a.active::after { width:100%; }
 
-.nav-cta{padding:.6rem 1.5rem;font-size:.68rem;}
+.nav-cta { padding:.6rem 1.5rem; font-size:.68rem; }
 
-/* Hamburger */
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
-.hamburger span{display:block;width:24px;height:1.5px;background:var(--cream);transition:all .3s var(--ease);}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4.7px,4.7px);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4.7px,-4.7px);}
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+.hamburger span { display:block; width:24px; height:1.5px; background:var(--cream); transition:all .3s var(--ease); }
+.hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(4.7px,4.7px); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(4.7px,-4.7px); }
 
-/* Mobile menu */
-.mobile-nav{
-  display:none;position:fixed;inset:0;z-index:999;
+.mobile-nav {
+  display:none; position:fixed; inset:0; z-index:999;
   background:rgba(13,10,14,.97);
-  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+  flex-direction:column; align-items:center; justify-content:center; gap:2.5rem;
 }
-.mobile-nav.open{display:flex;}
-.mobile-nav a{
-  font-family:var(--font-serif);font-size:2.2rem;font-weight:300;
-  color:rgba(245,239,230,.7);transition:color .2s;
+.mobile-nav.open { display:flex; }
+.mobile-nav a {
+  font-family:var(--font-serif); font-size:2.2rem; font-weight:300;
+  color:rgba(245,239,230,.7); transition:color .2s;
 }
-.mobile-nav a:hover{color:var(--gold);}
+.mobile-nav a:hover { color:var(--gold); }
 
 /* ==========================================================
    PAGE MANAGEMENT
 ========================================================== */
-.page{display:none;}
-.page.active{display:block;}
+.page { display:none; }
+.page.active { display:block; }
 
 /* ==========================================================
    HERO
 ========================================================== */
-#hero{
-  position:relative;min-height:100vh;
-  display:flex;flex-direction:column;
-  align-items:flex-start;justify-content:center;
-  padding:9rem 10vw 4rem;
-  overflow:hidden;
+#hero {
+  position:relative; min-height:100vh;
+  display:flex; flex-direction:column;
+  align-items:flex-start; justify-content:center;
+  padding:9rem 10vw 4rem; overflow:hidden;
 }
-.hero-bg{
-  position:absolute;inset:0;
+.hero-bg {
+  position:absolute; inset:0;
   background-image:url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1800&q=80&fit=crop');
-  background-size:cover;background-position:center 30%;
+  background-size:cover; background-position:center 30%;
 }
-.hero-bg::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(100deg, rgba(13,10,14,.92) 0%, rgba(13,10,14,.75) 50%, rgba(13,10,14,.35) 100%);
+.hero-bg::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(100deg,rgba(13,10,14,.92) 0%,rgba(13,10,14,.75) 50%,rgba(13,10,14,.35) 100%);
 }
-.hero-content{position:relative;z-index:1;max-width:620px;}
-.hero-logo{width:68px;height:68px;object-fit:contain;margin-bottom:2rem;filter:drop-shadow(0 0 16px rgba(192,41,122,.4));}
-.hero-content h1{color:var(--white);margin-bottom:1.2rem;}
-.hero-content h1 em{color:var(--gold);font-style:italic;}
-.hero-content p{color:rgba(245,239,230,.72);font-size:1.05rem;max-width:440px;margin-bottom:2.5rem;}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.hero-content { position:relative; z-index:1; max-width:620px; }
+.hero-logo {
+  width:68px; height:68px; object-fit:contain; margin-bottom:2rem;
+  filter:drop-shadow(0 0 16px rgba(192,41,122,.4));
+}
+.hero-content h1  { color:var(--white); margin-bottom:1.2rem; }
+.hero-content h1 em { color:var(--gold); font-style:italic; }
+.hero-content p   { color:rgba(245,239,230,.72); font-size:1.05rem; max-width:440px; margin-bottom:2.5rem; }
+.hero-btns { display:flex; gap:1rem; flex-wrap:wrap; }
 
-/* Scroll hint */
-.scroll-hint{
-  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:.5rem;
-  z-index:1;opacity:.4;
-  animation:bob 2.2s ease-in-out infinite;
+.scroll-hint {
+  position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:.5rem;
+  z-index:1; opacity:.4; animation:bob 2.2s ease-in-out infinite;
 }
-.scroll-hint span{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);}
-.scroll-hint ion-icon{font-size:1.1rem;color:var(--cream);}
-@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.scroll-hint span    { font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--cream); }
+.scroll-hint ion-icon { font-size:1.1rem; color:var(--cream); }
+@keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
 
 /* ==========================================================
-   STATS STRIP
+   STATS
 ========================================================== */
-#stats{
+#stats {
   background:linear-gradient(135deg,rgba(45,10,63,.9),rgba(13,10,14,.95));
   border-top:1px solid rgba(201,168,76,.12);
   border-bottom:1px solid rgba(201,168,76,.12);
   padding:3.5rem 4rem;
 }
-.stats-row{
-  max-width:960px;margin:0 auto;
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:2rem;
+.stats-row {
+  max-width:960px; margin:0 auto;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:2rem;
 }
-.stat-item{text-align:center;}
-.stat-num{
-  font-family:var(--font-serif);
-  font-size:2.8rem;font-weight:300;
-  color:var(--gold);line-height:1;
-}
-.stat-lbl{
-  font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(245,239,230,.45);margin-top:.4rem;
-}
-.stat-sep{width:1px;height:40px;background:rgba(201,168,76,.18);}
+.stat-item { text-align:center; }
+.stat-num  { font-family:var(--font-serif); font-size:2.8rem; font-weight:300; color:var(--gold); line-height:1; }
+.stat-lbl  { font-size:.65rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:rgba(245,239,230,.45); margin-top:.4rem; }
+.stat-sep  { width:1px; height:40px; background:rgba(201,168,76,.18); }
 
 /* ==========================================================
-   SERVICES PREVIEW (Home)
+   SERVICES PREVIEW
 ========================================================== */
-#svc-preview{padding:7rem 4rem;background:var(--ink);}
-.svc-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:1px;
-  border:1px solid rgba(255,255,255,.06);
-  margin-top:3.5rem;
+#svc-preview { padding:7rem 4rem; background:var(--ink); }
+.svc-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1px; border:1px solid rgba(255,255,255,.06); margin-top:3.5rem;
 }
-.svc-tile{
+.svc-tile {
   padding:2.5rem 2rem;
-  background:rgba(255,255,255,.025);
-  border:1px solid rgba(255,255,255,.055);
-  transition:background .3s var(--ease),border-color .3s;
-  cursor:pointer;
+  background:rgba(255,255,255,.025); border:1px solid rgba(255,255,255,.055);
+  transition:background .3s var(--ease), border-color .3s; cursor:pointer;
 }
-.svc-tile:hover{
-  background:rgba(201,168,76,.06);
-  border-color:rgba(201,168,76,.2);
-}
-.svc-tile:hover .svc-tile-icon{color:var(--gold);}
-.svc-tile-icon{
-  font-size:1.6rem;color:rgba(245,239,230,.35);
-  margin-bottom:1.2rem;
-  transition:color .3s;
-  display:block;
-}
-.svc-tile h3{
-  font-size:1.15rem;color:var(--cream);
-  margin-bottom:.6rem;
-}
-.svc-tile p{font-size:.85rem;color:var(--muted);line-height:1.65;}
-.svc-tile .tile-price{
-  margin-top:1.2rem;
-  font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--gold);
-}
-.svc-footer{margin-top:3.5rem;text-align:center;}
+.svc-tile:hover { background:rgba(201,168,76,.06); border-color:rgba(201,168,76,.2); }
+.svc-tile:hover .svc-tile-icon { color:var(--gold); }
+.svc-tile-icon { font-size:1.6rem; color:rgba(245,239,230,.35); margin-bottom:1.2rem; transition:color .3s; display:block; }
+.svc-tile h3   { font-size:1.15rem; color:var(--cream); margin-bottom:.6rem; }
+.svc-tile p    { font-size:.85rem; color:var(--muted); line-height:1.65; }
+.svc-tile .tile-price { margin-top:1.2rem; font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
+.svc-footer { margin-top:3.5rem; text-align:center; }
 
 /* ==========================================================
-   SPLIT FEATURE — full bleed image beside text
+   SPLIT
 ========================================================== */
-.split{
-  display:grid;grid-template-columns:1fr 1fr;
-  min-height:580px;
-}
-.split.reverse{direction:rtl;}
-.split.reverse>*{direction:ltr;}
-.split-img{
-  position:relative;overflow:hidden;
-}
-.split-img img{
-  width:100%;height:100%;
-  object-fit:cover;
-  transition:transform 6s var(--ease);
-}
-.split:hover .split-img img{transform:scale(1.04);}
-.split-img-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to right, rgba(13,10,14,.3) 0%, transparent 100%);
-}
-.split.reverse .split-img-overlay{
-  background:linear-gradient(to left, rgba(13,10,14,.3) 0%, transparent 100%);
-}
-.split-text{
-  background:var(--ink-soft);
-  padding:5rem 4rem;
-  display:flex;flex-direction:column;justify-content:center;
-}
-.split-text h2{color:var(--cream);margin-bottom:1rem;}
-.split-text p{color:var(--muted);max-width:400px;margin-bottom:2rem;}
+.split { display:grid; grid-template-columns:1fr 1fr; min-height:580px; }
+.split.reverse { direction:rtl; }
+.split.reverse > * { direction:ltr; }
+.split-img { position:relative; overflow:hidden; }
+.split-img img { width:100%; height:100%; object-fit:cover; transition:transform 6s var(--ease); }
+.split:hover .split-img img { transform:scale(1.04); }
+.split-img-overlay { position:absolute; inset:0; background:linear-gradient(to right,rgba(13,10,14,.3) 0%,transparent 100%); }
+.split.reverse .split-img-overlay { background:linear-gradient(to left,rgba(13,10,14,.3) 0%,transparent 100%); }
+.split-text { background:var(--ink-soft); padding:5rem 4rem; display:flex; flex-direction:column; justify-content:center; }
+.split-text h2 { color:var(--cream); margin-bottom:1rem; }
+.split-text p  { color:var(--muted); max-width:400px; margin-bottom:2rem; }
 
 /* ==========================================================
-   DELIVERY BAND
+   DELIVERY
 ========================================================== */
-#delivery{
-  padding:5rem 4rem;
-  background:var(--plum);
+#delivery {
+  padding:5rem 4rem; background:var(--plum);
   border-top:1px solid rgba(201,168,76,.15);
   border-bottom:1px solid rgba(201,168,76,.15);
 }
-.delivery-inner{
-  max-width:900px;margin:0 auto;
-  display:grid;grid-template-columns:1fr auto;
-  gap:3rem;align-items:center;
-}
-.delivery-text h2{color:var(--cream);}
-.delivery-text p{color:rgba(245,239,230,.65);margin-top:.8rem;max-width:520px;}
-.delivery-areas{
-  display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem;
-}
-.area-tag{
-  padding:.3rem .85rem;
-  border:1px solid rgba(201,168,76,.28);
-  font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--gold-pale);
-  border-radius:0;
-}
-.area-tag.main{background:rgba(201,168,76,.12);border-color:var(--gold);}
+.delivery-inner { max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr auto; gap:3rem; align-items:center; }
+.delivery-text h2 { color:var(--cream); }
+.delivery-text p  { color:rgba(245,239,230,.65); margin-top:.8rem; max-width:520px; }
+.delivery-areas   { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.5rem; }
+.area-tag { padding:.3rem .85rem; border:1px solid rgba(201,168,76,.28); font-size:.68rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-pale); }
+.area-tag.main { background:rgba(201,168,76,.12); border-color:var(--gold); }
 
 /* ==========================================================
-   SOCIAL / TIKTOK GLIMPSE
+   TIKTOK SECTION
 ========================================================== */
-#social{
-  padding:7rem 4rem;
-  background:linear-gradient(180deg,var(--ink-soft) 0%,var(--ink) 100%);
-}
-.social-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;gap:2rem;flex-wrap:wrap;}
-.tiktok-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
-}
-.tt-frame{
+#social { padding:7rem 4rem; background:linear-gradient(180deg,var(--ink-soft) 0%,var(--ink) 100%); }
+.social-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3rem; gap:2rem; flex-wrap:wrap; }
+.tiktok-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+.tt-frame {
   border:1px solid rgba(255,255,255,.07);
-  aspect-ratio:9/16;max-height:500px;
-  position:relative;overflow:hidden;
+  aspect-ratio:9/16; max-height:700px;
+  position:relative; overflow:hidden;
   background:rgba(255,255,255,.03);
-  display:flex;align-items:center;justify-content:center;
+  display:flex; align-items:flex-start; justify-content:center;
 }
-.tt-placeholder{
-  display:flex;flex-direction:column;align-items:center;gap:1rem;
-  padding:2rem;text-align:center;
-}
-.tt-placeholder ion-icon{font-size:2.5rem;color:rgba(201,168,76,.4);}
-.tt-placeholder strong{font-family:var(--font-serif);font-size:1.1rem;color:rgba(245,239,230,.5);}
-.tt-placeholder small{font-size:.78rem;color:var(--muted);}
+.tt-frame .tiktok-embed { width:100% !important; min-width:100% !important; max-width:100% !important; }
 
 /* ==========================================================
-   HOME CTA FULL-BLEED
+   HOME CTA
 ========================================================== */
-#home-cta{
-  position:relative;
-  min-height:480px;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;
-  overflow:hidden;
+#home-cta {
+  position:relative; min-height:480px;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; overflow:hidden;
 }
-.home-cta-bg{
-  position:absolute;inset:0;
-  background-image:url('https://images.unsplash.com/photo-1747979022469-43e0f3d7641f?q=80&w=739&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-  background-size:cover;background-position:center 40%;
+.home-cta-bg {
+  position:absolute; inset:0;
+  background-image:url('https://images.unsplash.com/photo-1747979022469-43e0f3d7641f?q=80&w=1400&fit=crop');
+  background-size:cover; background-position:center 40%;
 }
-.home-cta-bg::after{
-  content:'';position:absolute;inset:0;
-  background:rgba(13,10,14,.78);
-}
-.home-cta-content{position:relative;z-index:1;max-width:580px;padding:4rem 2rem;}
-.home-cta-content h2{color:var(--white);margin-bottom:.8rem;}
-.home-cta-content p{color:rgba(245,239,230,.68);margin-bottom:2.5rem;}
-.home-cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.home-cta-bg::after { content:''; position:absolute; inset:0; background:rgba(13,10,14,.78); }
+.home-cta-content { position:relative; z-index:1; max-width:580px; padding:4rem 2rem; }
+.home-cta-content h2 { color:var(--white); margin-bottom:.8rem; }
+.home-cta-content p  { color:rgba(245,239,230,.68); margin-bottom:2.5rem; }
+.home-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
 
 /* ==========================================================
-   ABOUT PAGE
+   PAGE HERO (inner pages)
 ========================================================== */
-.page-hero{
-  position:relative;min-height:52vh;
-  display:flex;align-items:flex-end;
-  padding:8rem 10vw 5rem;
-  overflow:hidden;
+.page-hero {
+  position:relative; min-height:52vh;
+  display:flex; align-items:flex-end;
+  padding:8rem 10vw 5rem; overflow:hidden;
 }
-.page-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
-.page-hero-bg::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(13,10,14,1) 0%, rgba(13,10,14,.6) 60%, rgba(13,10,14,.35) 100%);
+.page-hero-bg { position:absolute; inset:0; background-size:cover; background-position:center; }
+.page-hero-bg::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to top,rgba(13,10,14,1) 0%,rgba(13,10,14,.6) 60%,rgba(13,10,14,.35) 100%);
 }
-.page-hero-content{position:relative;z-index:1;max-width:580px;}
-.page-hero-content h1{color:var(--white);}
+.page-hero-content { position:relative; z-index:1; max-width:580px; }
+.page-hero-content h1 { color:var(--white); }
 
-/* About body */
-.about-body{padding:7rem 4rem;background:var(--ink);}
-.about-cols{
-  max-width:1100px;margin:0 auto;
-  display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:start;
-}
-.about-copy p{color:var(--muted);margin-bottom:1.2rem;}
-.about-img-block{
-  position:sticky;top:7rem;
-  aspect-ratio:3/4;
-  overflow:hidden;
-  border:1px solid rgba(201,168,76,.15);
-}
-.about-img-block img{width:100%;height:100%;object-fit:cover;}
+/* ==========================================================
+   ABOUT
+========================================================== */
+.about-body { padding:7rem 4rem; background:var(--ink); }
+.about-cols { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1.1fr 1fr; gap:5rem; align-items:start; }
+.about-copy p { color:var(--muted); margin-bottom:1.2rem; }
+.about-img-block { position:sticky; top:7rem; aspect-ratio:3/4; overflow:hidden; border:1px solid rgba(201,168,76,.15); }
+.about-img-block img { width:100%; height:100%; object-fit:cover; }
 
-/* Values */
-.values-section{
-  padding:7rem 4rem;
-  background:var(--ink-soft);
-  border-top:1px solid rgba(255,255,255,.05);
-}
-.values-grid{
-  max-width:1100px;margin:3rem auto 0;
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;
-}
-.val-cell{
-  padding:2.5rem 2rem;
-  border:1px solid rgba(255,255,255,.055);
-  background:rgba(255,255,255,.015);
-}
-.val-cell ion-icon{font-size:1.5rem;color:rgba(201,168,76,.5);margin-bottom:1rem;display:block;}
-.val-cell h4{color:var(--cream);margin-bottom:.5rem;font-size:.78rem;letter-spacing:.15em;}
-.val-cell p{font-size:.84rem;color:var(--muted);}
+.values-section { padding:7rem 4rem; background:var(--ink-soft); border-top:1px solid rgba(255,255,255,.05); }
+.values-grid { max-width:1100px; margin:3rem auto 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px; }
+.val-cell { padding:2.5rem 2rem; border:1px solid rgba(255,255,255,.055); background:rgba(255,255,255,.015); }
+.val-cell ion-icon { font-size:1.5rem; color:rgba(201,168,76,.5); margin-bottom:1rem; display:block; }
+.val-cell h4 { color:var(--cream); margin-bottom:.5rem; font-size:.78rem; letter-spacing:.15em; }
+.val-cell p  { font-size:.84rem; color:var(--muted); }
 
-/* Coverage */
-.coverage-section{
-  padding:7rem 4rem;background:var(--ink);
-}
-.coverage-inner{max-width:1100px;margin:0 auto;}
-.coverage-split{
-  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
-  margin-top:3.5rem;
-}
-.coverage-areas{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+.coverage-section { padding:7rem 4rem; background:var(--ink); }
+.coverage-inner { max-width:1100px; margin:0 auto; }
+.coverage-split { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; margin-top:3.5rem; }
+.coverage-areas { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.2rem; }
 
 /* ==========================================================
    SERVICES PAGE
 ========================================================== */
-.services-body{
-  padding:5rem 4rem;
-  background:var(--ink);
+.services-body { padding:5rem 4rem; background:var(--ink); }
+.svc-tabs { display:flex; flex-wrap:wrap; gap:.4rem; border-bottom:1px solid rgba(255,255,255,.07); margin-bottom:3rem; }
+.svc-tab {
+  padding:.75rem 1.5rem; font-size:.68rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--muted); border-bottom:2px solid transparent; transition:all .2s; cursor:pointer;
+  display:flex; align-items:center; gap:.4rem;
 }
-.svc-tabs{
-  display:flex;flex-wrap:wrap;gap:.4rem;
-  border-bottom:1px solid rgba(255,255,255,.07);
-  padding-bottom:0;
-  margin-bottom:3rem;
-}
-.svc-tab{
-  padding:.75rem 1.5rem;
-  font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--muted);border-bottom:2px solid transparent;
-  transition:all .2s;cursor:pointer;
-  display:flex;align-items:center;gap:.4rem;
-}
-.svc-tab ion-icon{font-size:.9rem;}
-.svc-tab:hover{color:var(--cream);}
-.svc-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.svc-tab ion-icon { font-size:.9rem; }
+.svc-tab:hover  { color:var(--cream); }
+.svc-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
 
-.svc-cat{display:none;}
-.svc-cat.active{display:block;}
+.svc-cat { display:none; }
+.svc-cat.active { display:block; }
 
-.svc-table{
-  width:100%;border-collapse:collapse;
-}
-.svc-table thead tr{
-  border-bottom:1px solid rgba(201,168,76,.25);
-}
-.svc-table thead th{
-  padding:.9rem 1rem;
-  text-align:left;
-  font-family:var(--font-sans);
-  font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gold);
-}
-.svc-table tbody tr{
-  border-bottom:1px solid rgba(255,255,255,.05);
-  transition:background .15s;
-}
-.svc-table tbody tr:hover{background:rgba(201,168,76,.04);}
-.svc-table tbody td{
-  padding:.9rem 1rem;
-  font-size:.9rem;color:var(--cream);font-weight:300;
-}
-.svc-table tbody td:last-child{
-  font-weight:500;color:var(--gold);text-align:right;white-space:nowrap;
-}
-.cs-row{opacity:.4;}
-.cs-badge{
-  display:inline-block;
-  font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  padding:.15rem .5rem;
-  border:1px solid rgba(245,239,230,.2);color:var(--muted);
-  margin-left:.6rem;vertical-align:middle;
-}
+.svc-table { width:100%; border-collapse:collapse; }
+.svc-table thead tr { border-bottom:1px solid rgba(201,168,76,.25); }
+.svc-table thead th { padding:.9rem 1rem; text-align:left; font-family:var(--font-sans); font-size:.65rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); }
+.svc-table tbody tr { border-bottom:1px solid rgba(255,255,255,.05); transition:background .15s; }
+.svc-table tbody tr:hover { background:rgba(201,168,76,.04); }
+.svc-table tbody td { padding:.9rem 1rem; font-size:.9rem; color:var(--cream); font-weight:300; }
+.svc-table tbody td:last-child { font-weight:500; color:var(--gold); text-align:right; white-space:nowrap; }
+.cs-row { opacity:.4; }
+.cs-badge { display:inline-block; font-size:.6rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:.15rem .5rem; border:1px solid rgba(245,239,230,.2); color:var(--muted); margin-left:.6rem; vertical-align:middle; }
 
-.svc-book{
-  margin-top:4rem;padding:3.5rem;
-  border:1px solid rgba(201,168,76,.2);
-  background:rgba(201,168,76,.04);
-  display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;
-}
-.svc-book h3{color:var(--cream);}
-.svc-book p{color:var(--muted);margin-top:.4rem;}
-.svc-book-btns{display:flex;gap:1rem;flex-shrink:0;flex-wrap:wrap;}
+.svc-book { margin-top:4rem; padding:3.5rem; border:1px solid rgba(201,168,76,.2); background:rgba(201,168,76,.04); display:flex; justify-content:space-between; align-items:center; gap:2rem; flex-wrap:wrap; }
+.svc-book h3 { color:var(--cream); }
+.svc-book p  { color:var(--muted); margin-top:.4rem; }
+.svc-book-btns { display:flex; gap:1rem; flex-shrink:0; flex-wrap:wrap; }
 
 /* ==========================================================
    CONTACT PAGE
 ========================================================== */
-.contact-body{padding:7rem 4rem;background:var(--ink);}
-.contact-cols{
-  max-width:1100px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;
-  align-items:start;
-}
-.contact-info-block{position:sticky;top:7rem;}
-.contact-info-block h2{color:var(--cream);margin-bottom:.6rem;}
-.contact-info-block > p{color:var(--muted);margin-bottom:2.5rem;}
+.contact-body { padding:7rem 4rem; background:var(--ink); }
+.contact-cols { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1.4fr; gap:5rem; align-items:start; }
+.contact-info-block { position:sticky; top:7rem; }
+.contact-info-block h2   { color:var(--cream); margin-bottom:.6rem; }
+.contact-info-block > p  { color:var(--muted); margin-bottom:2.5rem; }
 
-.c-item{
-  display:flex;align-items:flex-start;gap:1rem;
-  margin-bottom:1.8rem;
-}
-.c-icon{
-  width:42px;height:42px;flex-shrink:0;
-  border:1px solid rgba(201,168,76,.25);
-  display:flex;align-items:center;justify-content:center;
-}
-.c-icon ion-icon{font-size:1.1rem;color:var(--gold);}
-.c-text strong{
-  display:block;font-size:.65rem;font-weight:600;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--gold);margin-bottom:.25rem;
-}
-.c-text a,.c-text span{font-size:.92rem;color:rgba(245,239,230,.65);}
-.c-text a:hover{color:var(--gold);}
+.c-item { display:flex; align-items:flex-start; gap:1rem; margin-bottom:1.8rem; }
+.c-icon { width:42px; height:42px; flex-shrink:0; border:1px solid rgba(201,168,76,.25); display:flex; align-items:center; justify-content:center; }
+.c-icon ion-icon { font-size:1.1rem; color:var(--gold); }
+.c-text strong { display:block; font-size:.65rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:.25rem; }
+.c-text a, .c-text span { font-size:.92rem; color:rgba(245,239,230,.65); }
+.c-text a:hover { color:var(--gold); }
 
-.social-row{display:flex;gap:.75rem;margin-top:2rem;}
-.soc-btn{
-  width:42px;height:42px;
-  border:1px solid rgba(255,255,255,.1);
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;
-}
-.soc-btn ion-icon{font-size:1.15rem;color:rgba(245,239,230,.55);transition:color .2s;}
-.soc-btn:hover{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.06);}
-.soc-btn:hover ion-icon{color:var(--gold);}
+.social-row { display:flex; gap:.75rem; margin-top:2rem; }
+.soc-btn { width:42px; height:42px; border:1px solid rgba(255,255,255,.1); display:flex; align-items:center; justify-content:center; transition:all .2s; }
+.soc-btn ion-icon { font-size:1.15rem; color:rgba(245,239,230,.55); transition:color .2s; }
+.soc-btn:hover { border-color:rgba(201,168,76,.4); background:rgba(201,168,76,.06); }
+.soc-btn:hover ion-icon { color:var(--gold); }
 
 /* FORM */
-.booking-form{
-  border:1px solid rgba(255,255,255,.07);
-  padding:3rem;background:rgba(255,255,255,.025);
+.booking-form { border:1px solid rgba(255,255,255,.07); padding:3rem; background:rgba(255,255,255,.025); }
+.booking-form h3 { color:var(--cream); margin-bottom:.3rem; }
+.form-sub { font-size:.82rem; color:var(--muted); margin-bottom:2rem; }
+.f-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.f-group { display:flex; flex-direction:column; gap:.45rem; margin-bottom:1.4rem; }
+.f-group label { font-size:.65rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:rgba(245,239,230,.5); }
+.f-group input,
+.f-group select,
+.f-group textarea {
+  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1);
+  padding:.75rem 1rem; font-family:var(--font-sans); font-size:.88rem;
+  color:var(--cream); outline:none; transition:border-color .2s, box-shadow .2s;
+  width:100%; -webkit-appearance:none;
 }
-.booking-form h3{color:var(--cream);margin-bottom:.3rem;}
-.form-sub{font-size:.82rem;color:var(--muted);margin-bottom:2rem;}
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.f-group{display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.4rem;}
-.f-group label{
-  font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(245,239,230,.5);
-}
-.f-group input,.f-group select,.f-group textarea{
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.1);
-  padding:.75rem 1rem;
-  font-family:var(--font-sans);font-size:.88rem;
-  color:var(--cream);outline:none;
-  transition:border-color .2s,box-shadow .2s;
-  width:100%;
-  -webkit-appearance:none;
-}
-.f-group input:focus,.f-group select,.f-group textarea:focus{
-  border-color:rgba(201,168,76,.5);
-  box-shadow:0 0 0 3px rgba(201,168,76,.07);
-}
-.f-group select option{background:var(--ink-soft);color:var(--cream);}
-.f-group textarea{resize:vertical;min-height:90px;}
-.f-note{font-size:.75rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6;}
-.f-note ion-icon{vertical-align:middle;color:var(--gold);margin-right:.2rem;}
+.f-group input:focus,
+.f-group select:focus,
+.f-group textarea:focus { border-color:rgba(201,168,76,.5); box-shadow:0 0 0 3px rgba(201,168,76,.07); }
+.f-group select option { background:var(--ink-soft); color:var(--cream); }
+.f-group textarea { resize:vertical; min-height:90px; }
+.f-opt-label { opacity:.45; font-weight:300; letter-spacing:0; text-transform:none; font-size:.65rem; }
+.f-note { font-size:.75rem; color:var(--muted); margin-bottom:1.5rem; line-height:1.6; }
+.f-note ion-icon { vertical-align:middle; color:var(--gold); margin-right:.2rem; }
 
-#form-status{
-  margin-top:1rem;font-size:.82rem;padding:.7rem 1rem;display:none;
-}
-#form-status.success{background:rgba(37,211,102,.1);color:#4ade80;display:block;border:1px solid rgba(37,211,102,.2);}
-#form-status.error{background:rgba(255,80,80,.08);color:#f87171;display:block;border:1px solid rgba(255,80,80,.15);}
-#form-status.loading{background:rgba(201,168,76,.07);color:var(--gold);display:block;border:1px solid rgba(201,168,76,.15);}
+#form-status { margin-top:1rem; font-size:.82rem; padding:.7rem 1rem; display:none; }
+#form-status.success { background:rgba(37,211,102,.1);  color:#4ade80; display:block; border:1px solid rgba(37,211,102,.2); }
+#form-status.error   { background:rgba(255,80,80,.08);  color:#f87171; display:block; border:1px solid rgba(255,80,80,.15); }
+#form-status.loading { background:rgba(201,168,76,.07); color:var(--gold); display:block; border:1px solid rgba(201,168,76,.15); }
 
 /* Map */
-#map{height:420px;border-top:1px solid rgba(255,255,255,.05);}
-#map iframe{width:100%;height:100%;border:none;display:block;filter:grayscale(.6) invert(.9) hue-rotate(190deg) saturate(.6) brightness(.7);}
+#map { height:420px; border-top:1px solid rgba(255,255,255,.05); }
+#map iframe { width:100%; height:100%; border:none; display:block; filter:grayscale(.6) invert(.9) hue-rotate(190deg) saturate(.6) brightness(.7); }
 
 /* ==========================================================
    FOOTER
 ========================================================== */
-footer{
-  background:var(--ink-soft);
-  border-top:1px solid rgba(201,168,76,.12);
-  padding:5rem 4rem 2rem;
-}
-.footer-grid{
-  max-width:1100px;margin:0 auto;
-  display:grid;grid-template-columns:1.8fr 1fr 1fr;gap:3rem;
-  padding-bottom:3rem;
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-.footer-brand img{width:44px;margin-bottom:1rem;}
-.footer-brand-name{
-  font-family:var(--font-serif);font-size:1rem;font-weight:400;
-  color:var(--cream);margin-bottom:.6rem;
-}
-.footer-brand-name span{color:var(--gold);font-style:italic;}
-.footer-brand p{font-size:.82rem;color:var(--muted);line-height:1.7;max-width:280px;}
-.footer-col h4{
-  font-size:.65rem;color:var(--gold);
-  letter-spacing:.2em;text-transform:uppercase;
-  margin-bottom:1.2rem;
-}
-.footer-col ul li{margin-bottom:.65rem;}
-.footer-col ul li a{
-  font-size:.85rem;color:var(--muted);
-  transition:color .2s;
-}
-.footer-col ul li a:hover{color:var(--cream);}
+footer { background:var(--ink-soft); border-top:1px solid rgba(201,168,76,.12); padding:5rem 4rem 2rem; }
+.footer-grid { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1.8fr 1fr 1fr; gap:3rem; padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,.06); }
+.footer-brand img { width:44px; margin-bottom:1rem; }
+.footer-brand-name { font-family:var(--font-serif); font-size:1rem; font-weight:400; color:var(--cream); margin-bottom:.6rem; }
+.footer-brand-name span { color:var(--gold); font-style:italic; }
+.footer-brand p { font-size:.82rem; color:var(--muted); line-height:1.7; max-width:280px; }
+.footer-col h4 { font-size:.65rem; color:var(--gold); letter-spacing:.2em; text-transform:uppercase; margin-bottom:1.2rem; }
+.footer-col ul li { margin-bottom:.65rem; }
+.footer-col ul li a { font-size:.85rem; color:var(--muted); transition:color .2s; }
+.footer-col ul li a:hover { color:var(--cream); }
 
-.footer-bottom{
-  max-width:1100px;margin:0 auto;
-  padding-top:2rem;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:1.5rem;
-}
-.footer-copy{font-size:.72rem;color:var(--muted);}
-.footer-social{display:flex;gap:.75rem;}
-.footer-social a{
-  width:38px;height:38px;
-  border:1px solid rgba(255,255,255,.08);
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;
-}
-.footer-social a ion-icon{font-size:1rem;color:var(--muted);transition:color .2s;}
-.footer-social a:hover{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.06);}
-.footer-social a:hover ion-icon{color:var(--gold);}
+.footer-bottom { max-width:1100px; margin:0 auto; padding-top:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; }
+.footer-copy { font-size:.72rem; color:var(--muted); }
+.footer-social { display:flex; gap:.75rem; }
+.footer-social a { width:38px; height:38px; border:1px solid rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; transition:all .2s; }
+.footer-social a ion-icon { font-size:1rem; color:var(--muted); transition:color .2s; }
+.footer-social a:hover { border-color:rgba(201,168,76,.3); background:rgba(201,168,76,.06); }
+.footer-social a:hover ion-icon { color:var(--gold); }
 
 /* ==========================================================
-   REVEAL ANIMATION
+   REVEAL
 ========================================================== */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease);}
-.reveal.in{opacity:1;transform:none;}
-.reveal-delay-1{transition-delay:.1s;}
-.reveal-delay-2{transition-delay:.2s;}
-.reveal-delay-3{transition-delay:.3s;}
-.reveal-delay-4{transition-delay:.4s;}
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .65s var(--ease), transform .65s var(--ease); }
+.reveal.in { opacity:1; transform:none; }
+.reveal-delay-1 { transition-delay:.1s; }
+.reveal-delay-2 { transition-delay:.2s; }
+.reveal-delay-3 { transition-delay:.3s; }
+.reveal-delay-4 { transition-delay:.4s; }
 
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
-@media(max-width:1024px){
-  #nav{padding:1.2rem 2.5rem;}
-  #nav.scrolled{padding:.9rem 2.5rem;}
-  #hero{padding:0 6vw;}
-  #stats{padding:3rem 2.5rem;}
-  #svc-preview,#delivery,#social,
-  .about-body,.values-section,.coverage-section,
-  .services-body,.contact-body{padding:5rem 2.5rem;}
-  footer{padding:4rem 2.5rem 2rem;}
-  .footer-grid{grid-template-columns:1fr 1fr;}
-  .split-text{padding:4rem 2.5rem;}
-  .delivery-inner{grid-template-columns:1fr;gap:2rem;}
+@media(max-width:1024px) {
+  #nav,#nav.scrolled { padding:1rem 2.5rem; }
+  #hero { padding:9rem 6vw 4rem; }
+  #stats,#svc-preview,#delivery,#social,.about-body,.values-section,.coverage-section,.services-body,.contact-body { padding:5rem 2.5rem; }
+  footer { padding:4rem 2.5rem 2rem; }
+  .footer-grid { grid-template-columns:1fr 1fr; }
+  .split-text { padding:4rem 2.5rem; }
+  .delivery-inner { grid-template-columns:1fr; gap:2rem; }
+  .page-hero { padding:7rem 6vw 4rem; }
 }
-@media(max-width:768px){
-  .nav-links,.nav-cta{display:none;}
-  .hamburger{display:flex;}
-  #nav{padding:1rem 1.5rem;}
-  #nav.scrolled{padding:.8rem 1.5rem;}
-  #hero{padding:0 6vw;}
-  #hero .hero-content h1{font-size:2.6rem;}
-  #stats{padding:2.5rem 1.5rem;}
-  .stats-row{justify-content:center;gap:1.5rem;}
-  .stat-sep{display:none;}
-  .split{grid-template-columns:1fr;}
-  .split.reverse{direction:ltr;}
-  .split-img{min-height:300px;}
-  #svc-preview,#delivery,#social,
-  .about-body,.values-section,.coverage-section,
-  .services-body,.contact-body{padding:4rem 1.5rem;}
-  .about-cols,.coverage-split,.contact-cols{grid-template-columns:1fr;}
-  .about-img-block{position:static;max-height:360px;}
-  .contact-info-block{position:static;}
-  .booking-form{padding:2rem 1.5rem;}
-  .f-row{grid-template-columns:1fr;}
-  .svc-book{flex-direction:column;}
-  footer{padding:3rem 1.5rem 1.5rem;}
-  .footer-grid{grid-template-columns:1fr;}
-  .page-hero{padding:0 6vw 3rem;}
+@media(max-width:768px) {
+  .nav-links,.nav-cta { display:none; }
+  .hamburger { display:flex; }
+  #nav,#nav.scrolled { padding:1rem 1.5rem; }
+  #hero { padding:8rem 6vw 4rem; }
+  #hero .hero-content h1 { font-size:2.6rem; }
+  #stats { padding:2.5rem 1.5rem; }
+  .stats-row { justify-content:center; gap:1.5rem; }
+  .stat-sep { display:none; }
+  .split { grid-template-columns:1fr; }
+  .split.reverse { direction:ltr; }
+  .split-img { min-height:300px; }
+  #svc-preview,#delivery,#social,.about-body,.values-section,.coverage-section,.services-body,.contact-body { padding:4rem 1.5rem; }
+  .about-cols,.coverage-split,.contact-cols { grid-template-columns:1fr; }
+  .about-img-block { position:static; max-height:360px; }
+  .contact-info-block { position:static; }
+  .booking-form { padding:2rem 1.5rem; }
+  .f-row { grid-template-columns:1fr; }
+  .svc-book { flex-direction:column; }
+  footer { padding:3rem 1.5rem 1.5rem; }
+  .footer-grid { grid-template-columns:1fr; }
+  .page-hero { padding:7rem 6vw 3rem; }
+  .tiktok-grid { grid-template-columns:1fr; }
 }
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
 }
 </style>
 </head>
@@ -839,7 +606,7 @@ footer{
 <nav id="nav">
   <div class="nav-brand">
     <img src="./assets/logo.png" alt="Ruaka Wig Spa" />
-    <div class="nav-brand-name">Ruaka Wig Spa<br><span>& Wellness Hub</span></div>
+    <div class="nav-brand-name">Ruaka Wig Spa<br><span>&amp; Wellness Hub</span></div>
   </div>
   <ul class="nav-links">
     <li><a href="#" onclick="showPage('home');return false;" id="nl-home" class="active">Home</a></li>
@@ -871,7 +638,6 @@ footer{
 ================================================================ -->
 <div id="page-home" class="page active">
 
-  <!-- HERO -->
   <section id="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
@@ -895,37 +661,20 @@ footer{
     </div>
   </section>
 
-  <!-- STATS -->
   <section id="stats">
     <div class="stats-row">
-      <div class="stat-item reveal">
-        <div class="stat-num">400<span style="color:var(--rose-lt)">+</span></div>
-        <div class="stat-lbl">Wigs Revived</div>
-      </div>
+      <div class="stat-item reveal"><div class="stat-num">400<span style="color:var(--rose-lt)">+</span></div><div class="stat-lbl">Wigs Revived</div></div>
       <div class="stat-sep reveal"></div>
-      <div class="stat-item reveal reveal-delay-1">
-        <div class="stat-num">300<span style="color:var(--rose-lt)">+</span></div>
-        <div class="stat-lbl">Happy Clients</div>
-      </div>
+      <div class="stat-item reveal reveal-delay-1"><div class="stat-num">300<span style="color:var(--rose-lt)">+</span></div><div class="stat-lbl">Happy Clients</div></div>
       <div class="stat-sep reveal reveal-delay-1"></div>
-      <div class="stat-item reveal reveal-delay-2">
-        <div class="stat-num">5<span style="color:var(--rose-lt)">+</span></div>
-        <div class="stat-lbl">Expert Staff</div>
-      </div>
+      <div class="stat-item reveal reveal-delay-2"><div class="stat-num">5<span style="color:var(--rose-lt)">+</span></div><div class="stat-lbl">Expert Staff</div></div>
       <div class="stat-sep reveal reveal-delay-2"></div>
-      <div class="stat-item reveal reveal-delay-3">
-        <div class="stat-num">9</div>
-        <div class="stat-lbl">Service Areas</div>
-      </div>
+      <div class="stat-item reveal reveal-delay-3"><div class="stat-num">9</div><div class="stat-lbl">Service Areas</div></div>
       <div class="stat-sep reveal reveal-delay-3"></div>
-      <div class="stat-item reveal reveal-delay-4">
-        <div class="stat-num">2026</div>
-        <div class="stat-lbl">Est. January</div>
-      </div>
+      <div class="stat-item reveal reveal-delay-4"><div class="stat-num">2026</div><div class="stat-lbl">Est. January</div></div>
     </div>
   </section>
 
-  <!-- SERVICES PREVIEW -->
   <section id="svc-preview">
     <div style="max-width:1100px;margin:0 auto;">
       <div class="reveal">
@@ -937,25 +686,25 @@ footer{
         <div class="svc-tile reveal" onclick="showPage('services')">
           <ion-icon name="sparkles-outline" class="svc-tile-icon"></ion-icon>
           <h3>Wig Services</h3>
-          <p>Laundry, revamp, lace replacement, curl restoration, installation and more. We treat every wig like royalty.</p>
+          <p>Laundry, revamp, lace replacement, curl restoration, installation and more.</p>
           <div class="tile-price">From KES 200</div>
         </div>
         <div class="svc-tile reveal reveal-delay-1" onclick="showPage('services')">
           <ion-icon name="cut-outline" class="svc-tile-icon"></ion-icon>
           <h3>Hair Services</h3>
-          <p>Braids, twists, locs, weaves, crochet, relaxing, dyeing, blow dry — all styles, all lengths.</p>
+          <p>Braids, twists, locs, weaves, crochet, relaxing, dyeing, blow dry — all styles.</p>
           <div class="tile-price">From KES 150</div>
         </div>
         <div class="svc-tile reveal reveal-delay-2" onclick="showPage('services')">
           <ion-icon name="leaf-outline" class="svc-tile-icon"></ion-icon>
-          <h3>Wellness & Massage</h3>
-          <p>Swedish, deep tissue, full body scrubs, face scrubs, steaming. Your body deserves the reset.</p>
+          <h3>Wellness &amp; Massage</h3>
+          <p>Swedish, deep tissue, full body scrubs, face scrubs, steaming.</p>
           <div class="tile-price">From KES 500</div>
         </div>
         <div class="svc-tile reveal reveal-delay-3" onclick="showPage('services')">
           <ion-icon name="flower-outline" class="svc-tile-icon"></ion-icon>
           <h3>Waxing</h3>
-          <p>Under arms, Brazilian, bikini — sugar or honey wax. Smooth, professional, comfortable.</p>
+          <p>Under arms, Brazilian, bikini — sugar or honey wax. Smooth &amp; professional.</p>
           <div class="tile-price">From KES 300</div>
         </div>
         <div class="svc-tile reveal reveal-delay-4" onclick="showPage('services')">
@@ -966,9 +715,7 @@ footer{
         </div>
       </div>
       <div class="svc-footer reveal">
-        <button class="btn btn-ghost" onclick="showPage('services')">
-          Full Price List <ion-icon name="arrow-forward-outline"></ion-icon>
-        </button>
+        <button class="btn btn-ghost" onclick="showPage('services')">Full Price List <ion-icon name="arrow-forward-outline"></ion-icon></button>
       </div>
     </div>
   </section>
@@ -976,12 +723,12 @@ footer{
   <!-- SPLIT — WIG CARE -->
   <div class="split reveal">
     <div class="split-img">
-      <img src="https://images.unsplash.com/photo-1747979022469-43e0f3d7641f?q=80&w=739&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Wig care treatment" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1747979022469-43e0f3d7641f?q=80&w=900&fit=crop" alt="Wig care treatment" loading="lazy" />
       <div class="split-img-overlay"></div>
     </div>
     <div class="split-text">
       <span class="eyebrow">Wig Specialists</span>
-      <h2 style="color:var(--cream);">Every wig tells<br><em style="color:var(--gold);">a story.</em></h2>
+      <h2>Every wig tells<br><em style="color:var(--gold);">a story.</em></h2>
       <span class="g-line"></span>
       <p>We specialize in breathing new life into your favourite wigs. From a simple wash and iron to a full revamp with elastic replacement and lace repair — our team handles it all with precision and care.</p>
       <p style="margin-top:-.5rem;">Free pickup and delivery within Ruaka. Delivery rates apply to other areas.</p>
@@ -998,21 +745,21 @@ footer{
       <div class="split-img-overlay"></div>
     </div>
     <div class="split-text" style="background:rgba(45,10,63,.6);backdrop-filter:blur(2px);">
-      <span class="eyebrow">Wellness & Spa</span>
-      <h2 style="color:var(--cream);">Rest. Restore.<br><em style="color:var(--gold);">Radiate.</em></h2>
+      <span class="eyebrow">Wellness &amp; Spa</span>
+      <h2>Rest. Restore.<br><em style="color:var(--gold);">Radiate.</em></h2>
       <span class="g-line"></span>
       <p>Swedish massage, deep tissue, hot stone (coming soon), full body scrubs, facial steaming. A true sanctuary for the body and mind, tucked away in Ruaka.</p>
-      <button class="btn btn-ghost" onclick="showPage('services');switchTab('wellness');" style="margin-top:.5rem;align-self:flex-start;">
+      <button class="btn btn-ghost" onclick="showPage('services');switchTab('wellness',null);" style="margin-top:.5rem;align-self:flex-start;">
         View Wellness Services <ion-icon name="arrow-forward-outline"></ion-icon>
       </button>
     </div>
   </div>
 
-  <!-- DELIVERY BAND -->
+  <!-- DELIVERY -->
   <section id="delivery">
     <div class="delivery-inner">
       <div class="delivery-text reveal">
-        <span class="eyebrow">Pickup & Delivery</span>
+        <span class="eyebrow">Pickup &amp; Delivery</span>
         <h2>We Come To You</h2>
         <span class="g-line"></span>
         <p>Can't make it to us? Drop your wig and we handle the rest. Free pickup and delivery within Ruaka — rates may apply to other areas.</p>
@@ -1036,7 +783,7 @@ footer{
     </div>
   </section>
 
-  <!-- TIKTOK GLIMPSE -->
+  <!-- TIKTOK -->
   <section id="social">
     <div style="max-width:1100px;margin:0 auto;">
       <div class="social-header">
@@ -1052,22 +799,14 @@ footer{
       </div>
       <div class="tiktok-grid">
         <div class="tt-frame reveal">
-          <!-- PASTE TIKTOK EMBED #1 HERE -->
-           <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@ruaka.wig.spa/video/7644954824756481287" data-video-id="7644954824756481287" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@ruaka.wig.spa" href="https://www.tiktok.com/@ruaka.wig.spa?refer=embed">@ruaka.wig.spa</a> Is the elastic on your wig loose? Well we can fix that…DM tu. <a title="wigrevampservices" target="_blank" href="https://www.tiktok.com/tag/wigrevampservices?refer=embed">#wigrevampservices</a> <a title="creatorsearchinsights" target="_blank" href="https://www.tiktok.com/tag/creatorsearchinsights?refer=embed">#Creatorsearchinsights</a> <a title="wiglaundrynearme" target="_blank" href="https://www.tiktok.com/tag/wiglaundrynearme?refer=embed">#wiglaundrynearme</a> <a target="_blank" title="♬ original sound - ᴍᴀꜱꜱᴀɢᴇ ʙʏ ꜱᴛᴇᴠᴇ - ᴡᴀᴋᴀɴɪᴀʀᴜ" href="https://www.tiktok.com/music/original-sound-7343334585065376517?refer=embed">♬ original sound - ᴍᴀꜱꜱᴀɢᴇ ʙʏ ꜱᴛᴇᴠᴇ - ᴡᴀᴋᴀɴɪᴀʀᴜ</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>
-          <!-- <div class="tt-placeholder">
-            <ion-icon name="logo-tiktok"></ion-icon>
-            <strong>Before &amp; After Transformation</strong>
-            <small>Paste your TikTok embed code here to show a wig transformation video.</small>
-          </div> -->
+          <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@ruaka.wig.spa/video/7652597953055444242" data-video-id="7652597953055444242" style="max-width:100%;min-width:100%;border:none;margin:0;">
+            <section><a target="_blank" title="@ruaka.wig.spa" href="https://www.tiktok.com/@ruaka.wig.spa?refer=embed">@ruaka.wig.spa</a> You don't need a Gucci or a vasarce to look good, as long as your hair is eating, you won already! DM us for affordable Wig Laundry Services. <a title="creatorsearchinsights" target="_blank" href="https://www.tiktok.com/tag/creatorsearchinsights?refer=embed">#creatorsearchinsights</a> <a target="_blank" title="♬ Made You Look - Meghan Trainor" href="https://www.tiktok.com/music/Made-You-Look-7153075272433060650?refer=embed">♬ Made You Look - Meghan Trainor</a></section>
+          </blockquote>
         </div>
         <div class="tt-frame reveal reveal-delay-2">
-          <!-- PASTE TIKTOK EMBED #2 HERE -->
-           <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@ruaka.wig.spa/video/7652597953055444242" data-video-id="7652597953055444242" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@ruaka.wig.spa" href="https://www.tiktok.com/@ruaka.wig.spa?refer=embed">@ruaka.wig.spa</a> You don’t need a Gucci or a vasarce to look good, as long as your hair is eating, you won already! DM us for affordable Wig Laundry Services. <a title="creatorsearchinsights" target="_blank" href="https://www.tiktok.com/tag/creatorsearchinsights?refer=embed">#creatorsearchinsights</a> <a target="_blank" title="♬ Made You Look - Meghan Trainor" href="https://www.tiktok.com/music/Made-You-Look-7153075272433060650?refer=embed">♬ Made You Look - Meghan Trainor</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>
-          <!-- <div class="tt-placeholder">
-            <ion-icon name="videocam-outline"></ion-icon>
-            <strong>Behind the Scenes</strong>
-            <small>Paste your second TikTok embed code here.</small>
-          </div> -->
+          <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@ruaka.wig.spa/video/7644954824756481287" data-video-id="7644954824756481287" style="max-width:100%;min-width:100%;border:none;margin:0;">
+            <section><a target="_blank" title="@ruaka.wig.spa" href="https://www.tiktok.com/@ruaka.wig.spa?refer=embed">@ruaka.wig.spa</a> Is the elastic on your wig loose? Well we can fix that…DM tu. <a title="wigrevampservices" target="_blank" href="https://www.tiktok.com/tag/wigrevampservices?refer=embed">#wigrevampservices</a> <a title="creatorsearchinsights" target="_blank" href="https://www.tiktok.com/tag/creatorsearchinsights?refer=embed">#Creatorsearchinsights</a> <a title="wiglaundrynearme" target="_blank" href="https://www.tiktok.com/tag/wiglaundrynearme?refer=embed">#wiglaundrynearme</a> <a target="_blank" title="♬ original sound" href="https://www.tiktok.com/music/original-sound-7343334585065376517?refer=embed">♬ original sound</a></section>
+          </blockquote>
         </div>
       </div>
     </div>
@@ -1099,7 +838,6 @@ footer{
      SERVICES
 ================================================================ -->
 <div id="page-services" class="page">
-
   <section class="page-hero">
     <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1800&q=80&fit=crop');"></div>
     <div class="page-hero-content">
@@ -1113,24 +851,13 @@ footer{
   <div class="services-body">
     <div style="max-width:1100px;margin:0 auto;">
       <div class="svc-tabs" id="svcTabs">
-        <button class="svc-tab active" onclick="switchTab('wig',this)">
-          <ion-icon name="sparkles-outline"></ion-icon> Wig Services
-        </button>
-        <button class="svc-tab" onclick="switchTab('hair',this)">
-          <ion-icon name="cut-outline"></ion-icon> Hair Services
-        </button>
-        <button class="svc-tab" onclick="switchTab('wellness',this)">
-          <ion-icon name="leaf-outline"></ion-icon> Wellness &amp; Massage
-        </button>
-        <button class="svc-tab" onclick="switchTab('waxing',this)">
-          <ion-icon name="flower-outline"></ion-icon> Waxing
-        </button>
-        <button class="svc-tab" onclick="switchTab('beauty',this)">
-          <ion-icon name="hand-right-outline"></ion-icon> Beauty
-        </button>
+        <button class="svc-tab active" onclick="switchTab('wig',this)"><ion-icon name="sparkles-outline"></ion-icon> Wig Services</button>
+        <button class="svc-tab" onclick="switchTab('hair',this)"><ion-icon name="cut-outline"></ion-icon> Hair Services</button>
+        <button class="svc-tab" onclick="switchTab('wellness',this)"><ion-icon name="leaf-outline"></ion-icon> Wellness &amp; Massage</button>
+        <button class="svc-tab" onclick="switchTab('waxing',this)"><ion-icon name="flower-outline"></ion-icon> Waxing</button>
+        <button class="svc-tab" onclick="switchTab('beauty',this)"><ion-icon name="hand-right-outline"></ion-icon> Beauty</button>
       </div>
 
-      <!-- WIG -->
       <div class="svc-cat active" id="svc-wig">
         <table class="svc-table">
           <thead><tr><th>Service</th><th style="text-align:right;">Price (KES)</th></tr></thead>
@@ -1149,7 +876,6 @@ footer{
         </table>
       </div>
 
-      <!-- HAIR -->
       <div class="svc-cat" id="svc-hair">
         <table class="svc-table">
           <thead><tr><th>Service</th><th style="text-align:right;">Price (KES)</th></tr></thead>
@@ -1184,7 +910,6 @@ footer{
         </table>
       </div>
 
-      <!-- WELLNESS -->
       <div class="svc-cat" id="svc-wellness">
         <table class="svc-table">
           <thead><tr><th>Service</th><th style="text-align:right;">Price (KES)</th></tr></thead>
@@ -1201,7 +926,6 @@ footer{
         </table>
       </div>
 
-      <!-- WAXING -->
       <div class="svc-cat" id="svc-waxing">
         <table class="svc-table">
           <thead><tr><th>Service</th><th style="text-align:right;">Price (KES)</th></tr></thead>
@@ -1221,7 +945,6 @@ footer{
         </table>
       </div>
 
-      <!-- BEAUTY -->
       <div class="svc-cat" id="svc-beauty">
         <table class="svc-table">
           <thead><tr><th>Service</th><th style="text-align:right;">Price (KES)</th></tr></thead>
@@ -1239,17 +962,12 @@ footer{
           <p>WhatsApp for the fastest response — or send us a booking form.</p>
         </div>
         <div class="svc-book-btns">
-          <a href="https://wa.me/254785773163" target="_blank" class="btn btn-gold">
-            <ion-icon name="logo-whatsapp"></ion-icon> WhatsApp Us
-          </a>
-          <button class="btn btn-ghost" onclick="showPage('contact')">
-            <ion-icon name="calendar-outline"></ion-icon> Booking Form
-          </button>
+          <a href="https://wa.me/254785773163" target="_blank" class="btn btn-gold"><ion-icon name="logo-whatsapp"></ion-icon> WhatsApp Us</a>
+          <button class="btn btn-ghost" onclick="showPage('contact')"><ion-icon name="calendar-outline"></ion-icon> Booking Form</button>
         </div>
       </div>
     </div>
   </div>
-
 </div><!-- /services -->
 
 
@@ -1257,9 +975,8 @@ footer{
      ABOUT
 ================================================================ -->
 <div id="page-about" class="page">
-
   <section class="page-hero">
-    <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1663582816182-15cf69d87665?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+    <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1663582816182-15cf69d87665?q=80&w=1174&fit=crop');"></div>
     <div class="page-hero-content">
       <span class="eyebrow">Our Story</span>
       <h1>About Ruaka<br><em style="color:var(--gold);">Wig Spa</em></h1>
@@ -1280,7 +997,7 @@ footer{
         <p>We believe beauty is not a luxury — it's confidence. And confidence starts at the crown.</p>
       </div>
       <div class="about-img-block reveal reveal-delay-2">
-        <img src="https://images.unsplash.com/photo-1583724711595-ed09eedf1ff8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHdpZ3xlbnwwfHwwfHx8MA%3D%3D" alt="Beauty and confidence" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1583724711595-ed09eedf1ff8?w=600&q=80&fit=crop" alt="Wig styling" loading="lazy" />
       </div>
     </div>
   </section>
@@ -1293,26 +1010,10 @@ footer{
         <span class="g-line"></span>
       </div>
       <div class="values-grid">
-        <div class="val-cell reveal">
-          <ion-icon name="ribbon-outline"></ion-icon>
-          <h4>Quality First</h4>
-          <p>Every wig, every treatment — done with care, precision and expertise from our trained team.</p>
-        </div>
-        <div class="val-cell reveal reveal-delay-1">
-          <ion-icon name="heart-outline"></ion-icon>
-          <h4>Client Love</h4>
-          <p>Over 100 loyal clients in Ruaka alone. We build relationships, not just appointments.</p>
-        </div>
-        <div class="val-cell reveal reveal-delay-2">
-          <ion-icon name="sparkles-outline"></ion-icon>
-          <h4>Confidence</h4>
-          <p>We believe every woman deserves to feel radiant. Our slogan isn't words — it's a promise.</p>
-        </div>
-        <div class="val-cell reveal reveal-delay-3">
-          <ion-icon name="trending-up-outline"></ion-icon>
-          <h4>Always Growing</h4>
-          <p>Open since 2026 and already thriving. We keep expanding services, team, and reach.</p>
-        </div>
+        <div class="val-cell reveal"><ion-icon name="ribbon-outline"></ion-icon><h4>Quality First</h4><p>Every wig, every treatment — done with care, precision and expertise from our trained team.</p></div>
+        <div class="val-cell reveal reveal-delay-1"><ion-icon name="heart-outline"></ion-icon><h4>Client Love</h4><p>Over 100 loyal clients in Ruaka alone. We build relationships, not just appointments.</p></div>
+        <div class="val-cell reveal reveal-delay-2"><ion-icon name="sparkles-outline"></ion-icon><h4>Confidence</h4><p>We believe every woman deserves to feel radiant. Our slogan isn't words — it's a promise.</p></div>
+        <div class="val-cell reveal reveal-delay-3"><ion-icon name="trending-up-outline"></ion-icon><h4>Always Growing</h4><p>Open since 2026 and already thriving. We keep expanding services, team, and reach.</p></div>
       </div>
     </div>
   </section>
@@ -1343,12 +1044,11 @@ footer{
           </a>
         </div>
         <div class="reveal reveal-delay-2" style="overflow:hidden;border:1px solid rgba(201,168,76,.15);aspect-ratio:4/3;">
-          <img src="https://images.unsplash.com/photo-1669127300649-940337f1487e?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Nairobi Kenya skyline" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
+          <img src="https://images.unsplash.com/photo-1669127300649-940337f1487e?q=80&w=1335&fit=crop" alt="Nairobi Kenya" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
         </div>
       </div>
     </div>
   </section>
-
 </div><!-- /about -->
 
 
@@ -1356,9 +1056,8 @@ footer{
      CONTACT
 ================================================================ -->
 <div id="page-contact" class="page">
-
   <section class="page-hero">
-    <div class="page-hero-bg" style="background-image:url('https://unsplash.com/photos/a-woman-getting-her-hair-done-by-a-hair-stylist-hwTBGB_wk10');"></div>
+    <div class="page-hero-bg" style="background-image:url('https://biznakenya.com/wp-content/uploads/2016/04/Semi-Permanent-Hair-Color-Brands-For-African-American-Hair.jpg'); background-size: cover;"></div>
     <div class="page-hero-content">
       <span class="eyebrow">Get In Touch</span>
       <h1>Book Your<br><em style="color:var(--gold);">Appointment</em></h1>
@@ -1370,63 +1069,40 @@ footer{
   <section class="contact-body">
     <div class="contact-cols">
 
-      <!-- INFO -->
       <div class="contact-info-block reveal">
         <span class="eyebrow">Reach Us</span>
         <h2>Let's<br><em style="color:var(--gold);">Talk</em></h2>
         <span class="g-line"></span>
         <p>Whether you need a wig revamp, a relaxing massage, or a full pamper session — we are here for you. WhatsApp us for the fastest response.</p>
-
         <div class="c-item" style="margin-top:2rem;">
           <div class="c-icon"><ion-icon name="logo-whatsapp"></ion-icon></div>
-          <div class="c-text">
-            <strong>Phone / WhatsApp</strong>
-            <a href="https://wa.me/254785773163" target="_blank">0785 773 163</a>
-          </div>
+          <div class="c-text"><strong>Phone / WhatsApp</strong><a href="https://wa.me/254785773163" target="_blank">0785 773 163</a></div>
         </div>
         <div class="c-item">
           <div class="c-icon"><ion-icon name="location-outline"></ion-icon></div>
-          <div class="c-text">
-            <strong>Location</strong>
-            <span>Ruaka kwa Bumps, Kiambu County</span>
-          </div>
+          <div class="c-text"><strong>Location</strong><span>Ruaka kwa Bumps, Kiambu County</span></div>
         </div>
         <div class="c-item">
           <div class="c-icon"><ion-icon name="bicycle-outline"></ion-icon></div>
-          <div class="c-text">
-            <strong>Pickup & Delivery</strong>
-            <span>Free within Ruaka · Rates apply elsewhere</span>
-          </div>
+          <div class="c-text"><strong>Pickup &amp; Delivery</strong><span>Free within Ruaka · Rates apply elsewhere</span></div>
         </div>
         <div class="c-item">
           <div class="c-icon"><ion-icon name="time-outline"></ion-icon></div>
-          <div class="c-text">
-            <strong>Hours</strong>
-            <span>Mon – Sat · 8:00 AM – 7:00 PM</span>
-          </div>
+          <div class="c-text"><strong>Hours</strong><span>Mon – Sat · 8:00 AM – 7:00 PM</span></div>
         </div>
-
         <div class="social-row">
-          <a class="soc-btn" href="https://www.instagram.com/ruakawigspa/" target="_blank" rel="noopener" aria-label="Instagram">
-            <ion-icon name="logo-instagram"></ion-icon>
-          </a>
-          <a class="soc-btn" href="https://www.tiktok.com/@ruaka.wig.spa" target="_blank" rel="noopener" aria-label="TikTok">
-            <ion-icon name="logo-tiktok"></ion-icon>
-          </a>
-          <a class="soc-btn" href="https://wa.me/254785773163" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <ion-icon name="logo-whatsapp"></ion-icon>
-          </a>
+          <a class="soc-btn" href="https://www.instagram.com/ruakawigspa/" target="_blank" rel="noopener" aria-label="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+          <a class="soc-btn" href="https://www.tiktok.com/@ruaka.wig.spa" target="_blank" rel="noopener" aria-label="TikTok"><ion-icon name="logo-tiktok"></ion-icon></a>
+          <a class="soc-btn" href="https://wa.me/254785773163" target="_blank" rel="noopener" aria-label="WhatsApp"><ion-icon name="logo-whatsapp"></ion-icon></a>
         </div>
-
         <a href="https://wa.me/254785773163" target="_blank" class="btn btn-wa" style="margin-top:2rem;width:100%;justify-content:center;">
           <ion-icon name="logo-whatsapp"></ion-icon> Chat on WhatsApp (Fastest)
         </a>
       </div>
 
-      <!-- FORM -->
       <div class="booking-form reveal reveal-delay-2">
         <h3>Booking Request</h3>
-        <p class="form-sub">Fill in the form — we'll send you a confirmation and open WhatsApp with your details pre-filled for fast confirmation.</p>
+        <p class="form-sub">Fill in the form — we'll email your details and open WhatsApp with everything pre-filled for fast confirmation.</p>
 
         <div class="f-row">
           <div class="f-group">
@@ -1440,44 +1116,37 @@ footer{
         </div>
 
         <div class="f-group">
+          <label for="f-email">Email Address <span class="f-opt-label">(for booking confirmation)</span></label>
+          <input type="email" id="f-email" placeholder="jane@email.com" />
+        </div>
+
+        <div class="f-group">
           <label for="f-service">Service *</label>
           <select id="f-service" required>
             <option value="">— Select a service —</option>
             <optgroup label="Wig Services">
-              <option>Wig Installation</option>
-              <option>Wig Laundry + Ironing</option>
-              <option>Wig Trimming</option>
-              <option>Watercurl Wig Laundry</option>
-              <option>Full Wig Curl / Waves Restoration</option>
-              <option>Full Wig Revamp</option>
-              <option>Wig Dyeing + Laundry</option>
-              <option>Lace Replacement</option>
+              <option>Wig Installation</option><option>Wig Laundry + Ironing</option>
+              <option>Wig Trimming</option><option>Watercurl Wig Laundry</option>
+              <option>Full Wig Curl / Waves Restoration</option><option>Full Wig Revamp</option>
+              <option>Wig Dyeing + Laundry</option><option>Lace Replacement</option>
               <option>Wig Elastic Replacement</option>
             </optgroup>
             <optgroup label="Hair Services">
-              <option>Braids</option><option>Twists</option>
-              <option>Dread Locks</option><option>Weaving</option>
-              <option>Crochet</option><option>Blow Dry</option>
-              <option>Dye / Colouring</option><option>Hair Relaxing</option>
-              <option>Cornrows</option>
+              <option>Braids</option><option>Twists</option><option>Dread Locks</option>
+              <option>Weaving</option><option>Crochet</option><option>Blow Dry</option>
+              <option>Dye / Colouring</option><option>Hair Relaxing</option><option>Cornrows</option>
             </optgroup>
             <optgroup label="Wellness & Massage">
-              <option>Swedish Massage</option>
-              <option>Deep Tissue Massage</option>
-              <option>Full Body Scrub</option>
-              <option>Face Scrub + Steaming</option>
+              <option>Swedish Massage</option><option>Deep Tissue Massage</option>
+              <option>Full Body Scrub</option><option>Face Scrub + Steaming</option>
               <option>Full Body Scrub + Swedish Massage</option>
             </optgroup>
             <optgroup label="Waxing">
-              <option>Under Arms Waxing</option>
-              <option>Brazilian Waxing</option>
-              <option>Bikini Waxing</option>
-              <option>Full Body Waxing</option>
+              <option>Under Arms Waxing</option><option>Brazilian Waxing</option>
+              <option>Bikini Waxing</option><option>Full Body Waxing</option>
             </optgroup>
             <optgroup label="Beauty">
-              <option>Manicure</option>
-              <option>Pedicure</option>
-              <option>Pedicure + Gel</option>
+              <option>Manicure</option><option>Pedicure</option><option>Pedicure + Gel</option>
             </optgroup>
           </select>
         </div>
@@ -1505,7 +1174,7 @@ footer{
 
         <p class="f-note">
           <ion-icon name="information-circle-outline"></ion-icon>
-          After submitting, WhatsApp will open with your booking details pre-filled so we can confirm faster. We will also receive your request by email.
+          After submitting, WhatsApp will open with your booking details pre-filled so we can confirm faster. If you provided an email, we'll send you a confirmation too.
         </p>
 
         <button class="btn btn-gold" id="form-btn" onclick="handleBooking()" style="width:100%;justify-content:center;">
@@ -1517,7 +1186,6 @@ footer{
     </div>
   </section>
 
-  <!-- MAP -->
   <div id="map">
     <iframe
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8540278217396!2d36.7795947!3d-1.206187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f23c104d13357%3A0x4e7b878675c73d5d!2sRUAKA%20WIG%20SPA!5e0!3m2!1sen!2ske!4v1718886400000!5m2!1sen!2ske"
@@ -1525,7 +1193,6 @@ footer{
       title="Ruaka Wig Spa on Google Maps">
     </iframe>
   </div>
-
 </div><!-- /contact -->
 
 
@@ -1551,7 +1218,7 @@ footer{
       <ul>
         <li><a href="https://wa.me/254785773163" target="_blank">WhatsApp: 0785 773 163</a></li>
         <li><a href="mailto:ruakawigspa@gmail.com">ruakawigspa@gmail.com</a></li>
-        <li><a href="https://goo.gl/maps/ruakawigspa" target="_blank">Ruaka kwa Bumps, Kiambu</a></li>
+        <li><a href="https://www.google.com/maps/place/RUAKA+WIG+SPA" target="_blank">Ruaka kwa Bumps, Kiambu</a></li>
         <li><a href="https://www.instagram.com/ruakawigspa/" target="_blank">Instagram</a></li>
         <li><a href="https://www.tiktok.com/@ruaka.wig.spa" target="_blank">TikTok</a></li>
       </ul>
@@ -1560,15 +1227,9 @@ footer{
   <div class="footer-bottom">
     <p class="footer-copy">© 2026 Ruaka Wig Spa &amp; Wellness Hub. All rights reserved.</p>
     <div class="footer-social">
-      <a href="https://www.instagram.com/ruakawigspa/" target="_blank" rel="noopener" aria-label="Instagram">
-        <ion-icon name="logo-instagram"></ion-icon>
-      </a>
-      <a href="https://www.tiktok.com/@ruaka.wig.spa" target="_blank" rel="noopener" aria-label="TikTok">
-        <ion-icon name="logo-tiktok"></ion-icon>
-      </a>
-      <a href="https://wa.me/254785773163" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <ion-icon name="logo-whatsapp"></ion-icon>
-      </a>
+      <a href="https://www.instagram.com/ruakawigspa/" target="_blank" rel="noopener" aria-label="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+      <a href="https://www.tiktok.com/@ruaka.wig.spa" target="_blank" rel="noopener" aria-label="TikTok"><ion-icon name="logo-tiktok"></ion-icon></a>
+      <a href="https://wa.me/254785773163" target="_blank" rel="noopener" aria-label="WhatsApp"><ion-icon name="logo-whatsapp"></ion-icon></a>
     </div>
   </div>
 </footer>
@@ -1576,13 +1237,12 @@ footer{
 
 <script>
 /* =========================================================
-   EmailJS — fill in your credentials
+   EmailJS
 ========================================================= */
-(function(){
-  emailjs.init({ publicKey: "YOUR_PUBLIC_KEY_HERE" });
-})();
-const EJ_SVC  = "YOUR_SERVICE_ID_HERE";
-const EJ_OWNR = "YOUR_OWNER_TEMPLATE_ID_HERE";
+(function(){ emailjs.init({ publicKey: "TTRRJFeuUkgidI-3b" }); })();
+const EJ_SVC   = "service_400dabb";
+const EJ_OWNR  = "template_p8n9ndc";  // <-- paste owner notification template ID
+const EJ_REPLY = "template_fa009fs";              // auto-reply to client
 
 /* =========================================================
    PAGE ROUTING
@@ -1592,8 +1252,8 @@ function showPage(name) {
   document.getElementById('page-' + name).classList.add('active');
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
   const nl = document.getElementById('nl-' + name);
-  if(nl) nl.classList.add('active');
-  window.scrollTo({ top:0, behavior:'smooth' });
+  if (nl) nl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   setTimeout(initReveal, 80);
 }
 
@@ -1618,9 +1278,16 @@ window.addEventListener('scroll', () => {
 function switchTab(name, el) {
   document.querySelectorAll('.svc-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.svc-cat').forEach(c => c.classList.remove('active'));
-  if(el) el.classList.add('active');
+  if (el) el.classList.add('active');
+  else {
+    // called programmatically — activate correct tab button
+    const tabs = document.querySelectorAll('.svc-tab');
+    const names = ['wig','hair','wellness','waxing','beauty'];
+    const idx = names.indexOf(name);
+    if (idx > -1 && tabs[idx]) tabs[idx].classList.add('active');
+  }
   const cat = document.getElementById('svc-' + name);
-  if(cat) cat.classList.add('active');
+  if (cat) cat.classList.add('active');
 }
 
 /* =========================================================
@@ -1628,9 +1295,9 @@ function switchTab(name, el) {
 ========================================================= */
 function initReveal() {
   const els = document.querySelectorAll('.reveal:not(.in)');
-  if(!els.length) return;
+  if (!els.length) return;
   const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: 0.1 });
   els.forEach(el => obs.observe(el));
 }
@@ -1640,7 +1307,7 @@ initReveal();
    DATE MIN
 ========================================================= */
 const di = document.getElementById('f-date');
-if(di) di.min = new Date().toISOString().split('T')[0];
+if (di) di.min = new Date().toISOString().split('T')[0];
 
 /* =========================================================
    BOOKING FORM
@@ -1648,6 +1315,7 @@ if(di) di.min = new Date().toISOString().split('T')[0];
 async function handleBooking() {
   const name     = document.getElementById('f-name').value.trim();
   const phone    = document.getElementById('f-phone').value.trim();
+  const email    = document.getElementById('f-email').value.trim();
   const service  = document.getElementById('f-service').value;
   const date     = document.getElementById('f-date').value;
   const time     = document.getElementById('f-time').value;
@@ -1656,23 +1324,28 @@ async function handleBooking() {
   const status   = document.getElementById('form-status');
   const btn      = document.getElementById('form-btn');
 
-  if(!name || !phone || !service || !date) {
+  if (!name || !phone || !service || !date) {
     status.className = 'error';
     status.textContent = 'Please fill in your name, phone, service and preferred date.';
     return;
   }
 
   const dateStr = new Date(date + 'T00:00:00').toLocaleDateString('en-KE', {
-    weekday:'long', year:'numeric', month:'long', day:'numeric'
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
   const timeStr = time || 'Flexible';
 
   const params = {
-    client_name: name, client_phone: phone, service,
-    date: dateStr, time: timeStr,
+    client_name:     name,
+    client_phone:    phone,
+    client_email:    email || 'Not provided',
+    service,
+    date:            dateStr,
+    time:            timeStr,
     client_location: location || 'Not specified',
-    notes: notes || 'None',
-    to_email: 'ruakawigspa@gmail.com'
+    notes:           notes    || 'None',
+    to_email:        'ruakawigspa@gmail.com',
+    reply_to:        email    || '',
   };
 
   status.className = 'loading';
@@ -1688,11 +1361,17 @@ async function handleBooking() {
   );
 
   try {
+    // 1. Notify owner
     await emailjs.send(EJ_SVC, EJ_OWNR, params);
+    // 2. Auto-reply to client (only if email provided)
+    if (email) {
+      await emailjs.send(EJ_SVC, EJ_REPLY, { ...params, to_email: email });
+    }
     status.className = 'success';
     status.textContent = '✓ Request sent! Opening WhatsApp to confirm your appointment...';
     setTimeout(() => window.open(`https://wa.me/254785773163?text=${waMsg}`, '_blank'), 1500);
-  } catch(err) {
+  } catch (err) {
+    console.error(err);
     status.className = 'error';
     status.textContent = 'Form issue — opening WhatsApp directly as backup.';
     setTimeout(() => window.open(`https://wa.me/254785773163?text=${waMsg}`, '_blank'), 1200);
