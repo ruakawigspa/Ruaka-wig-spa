@@ -1,0 +1,6 @@
+*env
+.env
+node_modules
+services.md
+changelog
+/assets/pdf_logo.pdf

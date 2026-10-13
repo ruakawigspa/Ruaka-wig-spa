@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.ruakawigspa.com/sitemap.xml
+
+# Disallow any private/admin paths if added in future
+Disallow: /admin/
+Disallow: /private/
